@@ -1,0 +1,19 @@
+ Amazon elastic file system is fully managed file storage service that enables users to store and access data in the aws cloud ,EFS is accessible over the network and cna be mounted on multiple EC2 instances , by copying data from both EBS volumes and modifying the applicaiton to save the new docs to EFS , users will be able to access their docs at same time
+ 
+ 2.to access s3 bucket to ec2 instance we should use the GATEWAY VPC ENDPOINT between vpc and aws service, it enables private connectivity to service , it allows gateway vpc endpoint for s3 the access to EC2 instacne without internet connectivity
+ 
+ 3.supposedly if i developed a static website using aws s3 and its fundraising website and to meet the regulatory and compliance of protecting data in transit 
+ it enables to handoff encryption data
+ we enable SSL/TLS USING AWS CERTIFICATE MANAGER
+ 
+ 4.if an org is using aws services for all its departments and it wants to limit access for this to only people inside the org and the solution that meets the requirements with least operational overhead is to
+ add the AWS PRINCIPALORGID GLOBAL CONDITION KEY WITH REFRENCE TO ORGANSIATION ID TO S3 BUCKET POLICY
+ 
+ 5.org need ability to analyze the log files of applicaiton , logs are stores in JSON format in S3 bucket , queried will be simple and run on demand to perform the analysis with minimal changes to existing architecure
+ 
+to use AMAZON ATHENA directly with S3 to run queries as needed
+athena is interactive query service that makes it easy to analyze data in amazon simple storage service using standard SQL, with few actions in management console, you can point athena at your data in s3 and beging standard sql
+
+6.S3 TRANSFER ACCELEARATION is the best becuase it faster and acceleration is designed to optimize transfer speeds across s3 buckets
+
+7.AWS TAPE GATEWAY also known as tape virtual tape library allows you to backup your on premises data to s3 from your corporate data centre
