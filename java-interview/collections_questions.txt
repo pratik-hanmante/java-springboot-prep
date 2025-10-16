@@ -1,0 +1,410 @@
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
+
+class Main {
+    public static void main(String[] args) {
+
+       // ============================================
+       // 1. CREATING COLLECTIONS
+       // ============================================
+       
+       // Arrays.asList() creates a FIXED-SIZE list (cannot add/remove elements)
+       // Wrap it in ArrayList to make it modifiable
+       List<String> footballers = new ArrayList<>(Arrays.asList(
+        "Marcus Silva", "Leon Bergström", "Diego Fernández", "Thomas Müller", 
+        "Alessandro Rossi", "Kevin De Bruyne", "Rafael Santos", "Johan Eriksson", 
+        "Antoine Dubois", "Luca Bianchi", "Hiroshi Tanaka", "Miguel Rodríguez", 
+        "Pierre Laurent", "Mateo García", "Andreas Schmidt"
+       ));
+
+       // ============================================
+       // 2. SORTING OPERATIONS
+       // ============================================
+       
+       System.out.println("\n=== 1. Sorting Alphabetically (Natural Order) ===");
+       // Collections.sort() uses natural ordering (alphabetical for Strings)
+       // Time Complexity: O(n log n)
+       Collections.sort(footballers);
+       footballers.forEach(System.out::println);
+
+       System.out.println("\n=== 2. Sorting Based on Length ===");
+       // Custom comparator using method reference
+       // Comparator.comparingInt() creates a comparator based on int values
+       Collections.sort(footballers, Comparator.comparingInt(String::length));
+       footballers.forEach(System.out::println);
+
+       System.out.println("\n=== 3. Sorting in Reverse Order ===");
+       // Collections.reverseOrder() returns a comparator for reverse natural ordering
+       footballers.sort(Collections.reverseOrder());
+       footballers.forEach(System.out::println);
+
+       System.out.println("\n=== 4. Custom Sorting (By Last Name) ===");
+       // Complex comparator: sort by last name (word after space)
+       footballers.sort((a, b) -> {
+           String lastNameA = a.substring(a.lastIndexOf(" ") + 1);
+           String lastNameB = b.substring(b.lastIndexOf(" ") + 1);
+           return lastNameA.compareTo(lastNameB);
+       });
+       footballers.forEach(System.out::println);
+
+       // ============================================
+       // 3. MANIPULATION OPERATIONS
+       // ============================================
+
+       System.out.println("\n=== 5. Shuffling the Elements ===");
+       // Randomly permutes the list - useful for randomizing data
+       Collections.shuffle(footballers);
+       footballers.forEach(System.out::println);
+
+       System.out.println("\n=== 6. Swapping Elements (First and Last) ===");
+       // Swaps elements at two positions - O(1) operation
+       Collections.swap(footballers, 0, footballers.size()-1);
+       footballers.forEach(System.out::println);
+
+       System.out.println("\n=== 7. Reversing the List ===");
+       // Reverses the order of elements in place
+       Collections.reverse(footballers);
+       footballers.forEach(System.out::println);
+
+       System.out.println("\n=== 8. Rotating Elements ===");
+       // Rotates list by specified distance (positive = right, negative = left)
+       Collections.rotate(footballers, 3); // Move last 3 elements to front
+       footballers.forEach(System.out::println);
+
+       // ============================================
+       // 4. IMMUTABILITY & THREAD-SAFETY
+       // ============================================
+
+       System.out.println("\n=== 9. Creating an Unmodifiable Collection ===");
+       // Returns an unmodifiable view - any modification throws UnsupportedOperationException
+       // Still FAIL-FAST: throws exception if original list is modified during iteration
+       List<String> unmodifiableList = Collections.unmodifiableList(footballers);
+       unmodifiableList.forEach(System.out::println);
+       
+       // Uncommenting below will throw UnsupportedOperationException
+       // unmodifiableList.add("New Player"); 
+       // unmodifiableList.set(0, "Modified");
+
+       System.out.println("\n=== 10. Synchronized Collection (Thread-Safe) ===");
+       // Makes collection thread-safe by wrapping it with synchronized methods
+       // All methods are synchronized - performance overhead
+       List<String> synchronizedList = Collections.synchronizedList(new ArrayList<>(footballers));
+       System.out.println("Created synchronized list with " + synchronizedList.size() + " elements");
+       
+       // Must manually synchronize when iterating
+       synchronized(synchronizedList) {
+           synchronizedList.forEach(System.out::println);
+       }
+
+       // ============================================
+       // 5. SEARCHING & FINDING
+       // ============================================
+
+       System.out.println("\n=== 11. Finding Max and Min ===");
+       // Max/Min based on natural ordering or custom comparator
+       String longestName = Collections.max(footballers, Comparator.comparingInt(String::length));
+       String shortestName = Collections.min(footballers, Comparator.comparingInt(String::length));
+       System.out.println("Longest Name: " + longestName);
+       System.out.println("Shortest Name: " + shortestName);
+
+       System.out.println("\n=== 12. Binary Search (List must be sorted) ===");
+       // Binary Search requires sorted list - O(log n) complexity
+       Collections.sort(footballers);
+       int index = Collections.binarySearch(footballers, "Kevin De Bruyne");
+       if (index >= 0) {
+           System.out.println("Found 'Kevin De Bruyne' at index: " + index);
+       } else {
+           System.out.println("Not found. Insertion point: " + (-(index + 1)));
+       }
+
+       System.out.println("\n=== 13. Frequency of an Element ===");
+       // Counts occurrences of specified element - O(n) complexity
+       int frequency = Collections.frequency(footballers, "Kevin De Bruyne");
+       System.out.println("Frequency of 'Kevin De Bruyne': " + frequency);
+
+       // ============================================
+       // 6. SET OPERATIONS
+       // ============================================
+
+       System.out.println("\n=== 14. Checking if Two Lists are Disjoint ===");
+       // Returns true if two collections have no common elements
+       List<String> newFootballers = Arrays.asList("Rishabh Pant", "Shubhman Gill", "Kevin De Bruyne");
+       boolean noCommonElements = Collections.disjoint(footballers, newFootballers);
+       System.out.println("No common elements: " + noCommonElements);
+
+       // ============================================
+       // 7. COPYING & FILLING
+       // ============================================
+
+       System.out.println("\n=== 15. Copying Elements ===");
+       // Destination list must be at least as long as source list
+       // Creates list with empty strings, then copies source to dest
+       List<String> copyFootballers = new ArrayList<>(Collections.nCopies(footballers.size(), ""));
+       Collections.copy(copyFootballers, footballers);
+       System.out.println("Copied " + copyFootballers.size() + " elements");
+
+       System.out.println("\n=== 16. Replacing All Elements with a Single Value ===");
+       // Collections.fill() replaces all elements with specified value
+       List<String> replaceList = new ArrayList<>(footballers);
+       Collections.fill(replaceList, "Unknown Player");
+       System.out.println("First 3 after fill: " + replaceList.subList(0, 3));
+
+       System.out.println("\n=== 17. Adding Multiple Elements (addAll) ===");
+       // Collections.addAll() is more efficient than multiple add() calls
+       List<String> combinedList = new ArrayList<>(footballers);
+       Collections.addAll(combinedList, "Lionel Messi", "Cristiano Ronaldo", "Neymar Jr");
+       System.out.println("Total players after adding: " + combinedList.size());
+
+       // ============================================
+       // 8. FAIL-FAST vs FAIL-SAFE ITERATORS
+       // ============================================
+
+       System.out.println("\n=== 18. Fail-Fast Iterator Example ===");
+       // Most Java collections (ArrayList, HashMap, HashSet) are FAIL-FAST
+       // Throw ConcurrentModificationException if collection modified during iteration
+       try {
+           List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+           for (Integer num : numbers) {
+               System.out.print(num + " ");
+               if (num == 3) {
+                   numbers.add(10); // This will throw ConcurrentModificationException
+               }
+           }
+       } catch (ConcurrentModificationException e) {
+           System.out.println("\n✗ ConcurrentModificationException caught (Fail-Fast behavior)");
+       }
+
+       System.out.println("\n=== 19. Fail-Safe Iterator Example ===");
+       // Concurrent collections (CopyOnWriteArrayList, ConcurrentHashMap) are FAIL-SAFE
+       // Work on a snapshot/clone - modifications during iteration are allowed
+       CopyOnWriteArrayList<String> safeList = new CopyOnWriteArrayList<>(Arrays.asList("A", "B", "C"));
+       for (String item : safeList) {
+           System.out.print(item + " ");
+           if (item.equals("B")) {
+               safeList.add("D"); // No exception thrown
+           }
+       }
+       System.out.println("\n✓ No exception - Fail-Safe behavior");
+       System.out.println("Final list: " + safeList);
+
+       // ============================================
+       // 9. LIST vs SET vs MAP
+       // ============================================
+
+       System.out.println("\n=== 20. List vs Set vs Map Comparison ===");
+       
+       // LIST: Ordered, allows duplicates, indexed access
+       List<String> playerList = new ArrayList<>();
+       playerList.add("Messi");
+       playerList.add("Messi"); // Duplicate allowed
+       System.out.println("List (allows duplicates): " + playerList);
+
+       // SET: No duplicates, no guaranteed order (HashSet), no index
+       Set<String> playerSet = new HashSet<>();
+       playerSet.add("Messi");
+       playerSet.add("Messi"); // Duplicate ignored
+       System.out.println("Set (no duplicates): " + playerSet);
+
+       // MAP: Key-Value pairs, no duplicate keys
+       Map<String, Integer> playerGoals = new HashMap<>();
+       playerGoals.put("Messi", 800);
+       playerGoals.put("Ronaldo", 850);
+       System.out.println("Map (key-value): " + playerGoals);
+
+       // ============================================
+       // 10. IMPORTANT COLLECTION METHODS
+       // ============================================
+
+       System.out.println("\n=== 21. Important List Methods ===");
+       List<String> demoList = new ArrayList<>(Arrays.asList("A", "B", "C", "D", "E"));
+       
+       // subList() returns a view (changes reflect in original)
+       List<String> subList = demoList.subList(1, 4); // From index 1 to 3 (4 exclusive)
+       System.out.println("SubList (1-3): " + subList);
+       
+       // replaceAll() with lambda
+       demoList.replaceAll(String::toLowerCase);
+       System.out.println("After replaceAll: " + demoList);
+       
+       // removeIf() with predicate
+       demoList.removeIf(s -> s.equals("c"));
+       System.out.println("After removeIf: " + demoList);
+
+       // ============================================
+       // 11. PERFORMANCE COMPARISON
+       // ============================================
+
+       System.out.println("\n=== 22. ArrayList vs LinkedList Performance ===");
+       
+       // ArrayList: Fast random access O(1), slow insertion/deletion O(n)
+       List<Integer> arrayList = new ArrayList<>();
+       long start = System.nanoTime();
+       for (int i = 0; i < 10000; i++) {
+           arrayList.add(i);
+       }
+       long arrayListTime = System.nanoTime() - start;
+       
+       // LinkedList: Slow random access O(n), fast insertion/deletion O(1)
+       List<Integer> linkedList = new LinkedList<>();
+       start = System.nanoTime();
+       for (int i = 0; i < 10000; i++) {
+           linkedList.add(i);
+       }
+       long linkedListTime = System.nanoTime() - start;
+       
+       System.out.println("ArrayList add time: " + arrayListTime + " ns");
+       System.out.println("LinkedList add time: " + linkedListTime + " ns");
+
+       // ============================================
+       // 12. HASHMAP vs TREEMAP vs LINKEDHASHMAP
+       // ============================================
+
+       System.out.println("\n=== 23. Map Implementations Comparison ===");
+       
+       // HashMap: No order, O(1) operations, allows null key
+       Map<String, Integer> hashMap = new HashMap<>();
+       hashMap.put("Messi", 35);
+       hashMap.put("Ronaldo", 38);
+       hashMap.put("Neymar", 31);
+       System.out.println("HashMap (no order): " + hashMap.keySet());
+       
+       // TreeMap: Sorted by keys, O(log n) operations, no null key
+       Map<String, Integer> treeMap = new TreeMap<>();
+       treeMap.put("Messi", 35);
+       treeMap.put("Ronaldo", 38);
+       treeMap.put("Neymar", 31);
+       System.out.println("TreeMap (sorted): " + treeMap.keySet());
+       
+       // LinkedHashMap: Maintains insertion order, slightly slower than HashMap
+       Map<String, Integer> linkedHashMap = new LinkedHashMap<>();
+       linkedHashMap.put("Messi", 35);
+       linkedHashMap.put("Ronaldo", 38);
+       linkedHashMap.put("Neymar", 31);
+       System.out.println("LinkedHashMap (insertion order): " + linkedHashMap.keySet());
+
+       // ============================================
+       // 13. STREAM API WITH COLLECTIONS
+       // ============================================
+
+       System.out.println("\n=== 24. Stream API Examples ===");
+       
+       Collections.sort(footballers); // Sort first for demo
+       
+       // Filter and collect
+       List<String> longNames = footballers.stream()
+           .filter(name -> name.length() > 12)
+           .collect(Collectors.toList());
+       System.out.println("Players with name > 12 chars: " + longNames.size());
+       
+       // Map and collect
+       List<Integer> nameLengths = footballers.stream()
+           .map(String::length)
+           .collect(Collectors.toList());
+       System.out.println("Name lengths: " + nameLengths.subList(0, 5) + "...");
+       
+       // Count with condition
+       long count = footballers.stream()
+           .filter(name -> name.contains("a"))
+           .count();
+       System.out.println("Names containing 'a': " + count);
+
+       // ============================================
+       // 14. QUEUE & DEQUE OPERATIONS
+       // ============================================
+
+       System.out.println("\n=== 25. Queue Operations (FIFO) ===");
+       
+       // Queue: First-In-First-Out (FIFO)
+       Queue<String> queue = new LinkedList<>();
+       queue.offer("First");  // Add to rear
+       queue.offer("Second");
+       queue.offer("Third");
+       System.out.println("Queue: " + queue);
+       System.out.println("Peek (front): " + queue.peek()); // View front without removing
+       System.out.println("Poll (remove): " + queue.poll()); // Remove and return front
+       System.out.println("After poll: " + queue);
+
+       System.out.println("\n=== 26. Deque Operations (Double-Ended Queue) ===");
+       
+       // Deque: Can add/remove from both ends
+       Deque<String> deque = new ArrayDeque<>();
+       deque.addFirst("Front");
+       deque.addLast("Back");
+       deque.addFirst("New Front");
+       System.out.println("Deque: " + deque);
+       System.out.println("Remove first: " + deque.removeFirst());
+       System.out.println("Remove last: " + deque.removeLast());
+       System.out.println("After removals: " + deque);
+
+       // ============================================
+       // 15. IMPORTANT INTERVIEW CONCEPTS
+       // ============================================
+
+       System.out.println("\n=== 27. Comparable vs Comparator ===");
+       
+       // Comparable: Natural ordering (implements in the class itself)
+       // Comparator: Custom ordering (external to the class)
+       
+       List<Integer> nums = new ArrayList<>(Arrays.asList(5, 2, 8, 1, 9));
+       Collections.sort(nums); // Uses Comparable (Integer implements Comparable)
+       System.out.println("Natural order: " + nums);
+       
+       Collections.sort(nums, Comparator.reverseOrder()); // Uses Comparator
+       System.out.println("Custom order: " + nums);
+
+       System.out.println("\n=== 28. Singleton, Empty, and Checked Collections ===");
+       
+       // Singleton: Immutable collection with single element
+       Set<String> singletonSet = Collections.singleton("OnlyElement");
+       System.out.println("Singleton set: " + singletonSet);
+       
+       // Empty: Immutable empty collections
+       List<String> emptyList = Collections.emptyList();
+       System.out.println("Empty list size: " + emptyList.size());
+       
+       // Checked: Type-safe collection that throws exception on wrong type
+       List<String> checkedList = Collections.checkedList(new ArrayList<>(), String.class);
+       checkedList.add("Valid String");
+       System.out.println("Checked list: " + checkedList);
+
+       System.out.println("\n=== 29. Converting Between Collection Types ===");
+       
+       List<String> list = Arrays.asList("A", "B", "C", "A");
+       
+       // List to Set (removes duplicates)
+       Set<String> set = new HashSet<>(list);
+       System.out.println("List to Set: " + set);
+       
+       // Set back to List
+       List<String> listFromSet = new ArrayList<>(set);
+       System.out.println("Set to List: " + listFromSet);
+       
+       // List to Array
+       String[] array = list.toArray(new String[0]);
+       System.out.println("List to Array: " + Arrays.toString(array));
+       
+       // Array to List
+       List<String> listFromArray = Arrays.asList(array);
+       System.out.println("Array to List: " + listFromArray);
+
+       // ============================================
+       // SUMMARY OF KEY INTERVIEW POINTS
+       // ============================================
+       
+       System.out.println("\n" + "=".repeat(60));
+       System.out.println("KEY INTERVIEW POINTS:");
+       System.out.println("=".repeat(60));
+       System.out.println("1. ArrayList vs LinkedList: Random access vs Insert/Delete");
+       System.out.println("2. HashMap vs TreeMap vs LinkedHashMap: Speed vs Order");
+       System.out.println("3. Fail-Fast (ArrayList) vs Fail-Safe (CopyOnWriteArrayList)");
+       System.out.println("4. Comparable (natural) vs Comparator (custom sorting)");
+       System.out.println("5. Collections.synchronizedList() vs CopyOnWriteArrayList");
+       System.out.println("6. Arrays.asList() creates fixed-size list");
+       System.out.println("7. Collections.unmodifiableList() prevents modifications");
+       System.out.println("8. Binary search requires sorted list O(log n)");
+       System.out.println("9. Queue (FIFO) vs Deque (both ends) vs Stack (LIFO)");
+       System.out.println("10. Stream API for functional-style operations");
+       System.out.println("=".repeat(60));
+    }
+}
