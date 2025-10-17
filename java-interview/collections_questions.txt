@@ -389,22 +389,236 @@ class Main {
        System.out.println("Array to List: " + listFromArray);
 
        // ============================================
-       // SUMMARY OF KEY INTERVIEW POINTS
+       // 16. HASHSET vs TREESET vs LINKEDHASHSET
        // ============================================
+
+       System.out.println("\n=== 30. Set Implementations Comparison ===");
        
-       System.out.println("\n" + "=".repeat(60));
-       System.out.println("KEY INTERVIEW POINTS:");
-       System.out.println("=".repeat(60));
-       System.out.println("1. ArrayList vs LinkedList: Random access vs Insert/Delete");
-       System.out.println("2. HashMap vs TreeMap vs LinkedHashMap: Speed vs Order");
-       System.out.println("3. Fail-Fast (ArrayList) vs Fail-Safe (CopyOnWriteArrayList)");
-       System.out.println("4. Comparable (natural) vs Comparator (custom sorting)");
-       System.out.println("5. Collections.synchronizedList() vs CopyOnWriteArrayList");
-       System.out.println("6. Arrays.asList() creates fixed-size list");
-       System.out.println("7. Collections.unmodifiableList() prevents modifications");
-       System.out.println("8. Binary search requires sorted list O(log n)");
-       System.out.println("9. Queue (FIFO) vs Deque (both ends) vs Stack (LIFO)");
-       System.out.println("10. Stream API for functional-style operations");
-       System.out.println("=".repeat(60));
-    }
-}
+       // HashSet: No order, O(1) operations, allows null
+       Set<String> hashSet = new HashSet<>();
+       hashSet.add("Messi");
+       hashSet.add("Ronaldo");
+       hashSet.add("Neymar");
+       hashSet.add("Benzema");
+       System.out.println("HashSet (no order): " + hashSet);
+       
+       // TreeSet: Sorted order, O(log n) operations, no null
+       Set<String> treeSet = new TreeSet<>();
+       treeSet.add("Messi");
+       treeSet.add("Ronaldo");
+       treeSet.add("Neymar");
+       treeSet.add("Benzema");
+       System.out.println("TreeSet (sorted): " + treeSet);
+       
+       // LinkedHashSet: Insertion order, O(1) operations, allows null
+       Set<String> linkedHashSet = new LinkedHashSet<>();
+       linkedHashSet.add("Messi");
+       linkedHashSet.add("Ronaldo");
+       linkedHashSet.add("Neymar");
+       linkedHashSet.add("Benzema");
+       System.out.println("LinkedHashSet (insertion order): " + linkedHashSet);
+
+       // ============================================
+       // 17. HASHMAP INTERNAL WORKING
+       // ============================================
+
+       System.out.println("\n=== 31. HashMap Internal Working ===");
+       
+       Map<String, Integer> playerMap = new HashMap<>();
+       playerMap.put("Messi", 10);
+       playerMap.put("Ronaldo", 7);
+       
+       // Key concepts:
+       System.out.println("HashMap uses:");
+       System.out.println("- Array of buckets (default size: 16)");
+       System.out.println("- hashCode() to find bucket index");
+       System.out.println("- equals() to compare keys in same bucket");
+       System.out.println("- Load factor: 0.75 (rehashes at 75% capacity)");
+       System.out.println("- Java 8+: Uses trees instead of linked lists when bucket size > 8");
+       System.out.println("- putIfAbsent: " + playerMap.putIfAbsent("Neymar", 11));
+       System.out.println("- getOrDefault: " + playerMap.getOrDefault("Haaland", 0));
+       System.out.println("- computeIfAbsent: " + playerMap.computeIfAbsent("Mbappe", k -> 29));
+
+       // ============================================
+       // 18. CONCURRENT COLLECTIONS
+       // ============================================
+
+       System.out.println("\n=== 32. Concurrent Collections (Thread-Safe) ===");
+       
+       // ConcurrentHashMap: Thread-safe, no locking on entire map
+       Map<String, Integer> concurrentMap = new java.util.concurrent.ConcurrentHashMap<>();
+       concurrentMap.put("Key1", 1);
+       concurrentMap.put("Key2", 2);
+       System.out.println("ConcurrentHashMap: Segment-level locking, better performance");
+       
+       // CopyOnWriteArrayList: Thread-safe, creates copy on modification
+       List<String> cowList = new CopyOnWriteArrayList<>(Arrays.asList("A", "B"));
+       System.out.println("CopyOnWriteArrayList: Good for read-heavy operations");
+       
+       System.out.println("\nConcurrent vs Synchronized:");
+       System.out.println("- Synchronized: Locks entire collection (slow)");
+       System.out.println("- Concurrent: Segment/bucket level locking (fast)");
+
+       // ============================================
+       // 19. VECTOR vs ARRAYLIST
+       // ============================================
+
+       System.out.println("\n=== 33. Vector vs ArrayList ===");
+       
+       List<String> vector = new Vector<>();
+       vector.add("Item1");
+       List<String> arrayListDemo = new ArrayList<>();
+       arrayListDemo.add("Item1");
+       
+       System.out.println("Vector:");
+       System.out.println("- Synchronized (thread-safe but slower)");
+       System.out.println("- Legacy class (since JDK 1.0)");
+       System.out.println("- Grows by 100% (doubles in size)");
+       System.out.println("\nArrayList:");
+       System.out.println("- Not synchronized (faster)");
+       System.out.println("- Modern (since JDK 1.2)");
+       System.out.println("- Grows by 50%");
+
+       // ============================================
+       // 20. PRIORITYQUEUE (HEAP)
+       // ============================================
+
+       System.out.println("\n=== 34. PriorityQueue (Min-Heap by default) ===");
+       
+       // Min-heap: smallest element has highest priority
+       Queue<Integer> minHeap = new java.util.PriorityQueue<>();
+       minHeap.offer(5);
+       minHeap.offer(2);
+       minHeap.offer(8);
+       minHeap.offer(1);
+       System.out.println("Min-Heap: " + minHeap);
+       System.out.println("Peek (min): " + minHeap.peek());
+       
+       // Max-heap: largest element has highest priority
+       Queue<Integer> maxHeap = new java.util.PriorityQueue<>(Collections.reverseOrder());
+       maxHeap.offer(5);
+       maxHeap.offer(2);
+       maxHeap.offer(8);
+       maxHeap.offer(1);
+       System.out.println("Max-Heap peek (max): " + maxHeap.peek());
+
+       // ============================================
+       // 21. NAVIGABLE SET & MAP
+       // ============================================
+
+       System.out.println("\n=== 35. NavigableSet and NavigableMap ===");
+       
+       // NavigableSet: TreeSet implements this
+       java.util.NavigableSet<Integer> navSet = new TreeSet<>(Arrays.asList(10, 20, 30, 40, 50));
+       System.out.println("NavigableSet: " + navSet);
+       System.out.println("lower(30): " + navSet.lower(30));     // < 30
+       System.out.println("floor(30): " + navSet.floor(30));     // <= 30
+       System.out.println("ceiling(25): " + navSet.ceiling(25)); // >= 25
+       System.out.println("higher(30): " + navSet.higher(30));   // > 30
+       
+       // NavigableMap: TreeMap implements this
+       java.util.NavigableMap<String, Integer> navMap = new TreeMap<>();
+       navMap.put("A", 1);
+       navMap.put("C", 3);
+       navMap.put("E", 5);
+       System.out.println("firstEntry: " + navMap.firstEntry());
+       System.out.println("lastEntry: " + navMap.lastEntry());
+       System.out.println("subMap(A to D): " + navMap.subMap("A", "D"));
+
+       // ============================================
+       // 22. WEAKHASHMAP
+       // ============================================
+
+       System.out.println("\n=== 36. WeakHashMap (For Cache Implementation) ===");
+       
+       // Keys are stored as weak references - GC can remove entries
+       Map<String, String> weakMap = new java.util.WeakHashMap<>();
+       String key1 = new String("Key1");
+       String key2 = new String("Key2");
+       weakMap.put(key1, "Value1");
+       weakMap.put(key2, "Value2");
+       System.out.println("WeakHashMap size before GC: " + weakMap.size());
+       
+       key1 = null; // Remove strong reference
+       System.gc(); // Suggest garbage collection
+       
+       System.out.println("Used for memory-sensitive caches");
+       System.out.println("Entries removed when keys are GC'd");
+
+       // ============================================
+       // 23. IDENTITY HASHMAP
+       // ============================================
+
+       System.out.println("\n=== 37. IdentityHashMap (Uses == instead of equals) ===");
+       
+       Map<String, Integer> identityMap = new java.util.IdentityHashMap<>();
+       String s1 = new String("Key");
+       String s2 = new String("Key");
+       
+       identityMap.put(s1, 1);
+       identityMap.put(s2, 2);
+       System.out.println("IdentityHashMap size: " + identityMap.size()); // 2, not 1!
+       System.out.println("Uses reference equality (==), not equals()");
+
+       // ============================================
+       // 24. ENUM SET & ENUM MAP
+       // ============================================
+
+       System.out.println("\n=== 38. EnumSet and EnumMap (Optimized for Enums) ===");
+       
+       enum Day { MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY }
+       
+       // EnumSet: Very efficient, uses bit vector internally
+       EnumSet<Day> weekend = EnumSet.of(Day.FRIDAY);
+       EnumSet<Day> weekdays = EnumSet.range(Day.MONDAY, Day.THURSDAY);
+       System.out.println("EnumSet (weekdays): " + weekdays);
+       
+       // EnumMap: Fast, compact
+       java.util.EnumMap<Day, String> enumMap = new java.util.EnumMap<>(Day.class);
+       enumMap.put(Day.MONDAY, "Start of week");
+       System.out.println("EnumMap: " + enumMap);
+
+       // ============================================
+       // 25. COLLECTION INTERFACE HIERARCHY
+       // ============================================
+
+       System.out.println("\n=== 39. Collection Interface Hierarchy ===");
+       System.out.println("Collection (I)");
+       System.out.println("├── List (I) - ArrayList, LinkedList, Vector, Stack");
+       System.out.println("├── Set (I)");
+       System.out.println("│   ├── HashSet");
+       System.out.println("│   ├── LinkedHashSet");
+       System.out.println("│   └── SortedSet (I) - TreeSet");
+       System.out.println("└── Queue (I)");
+       System.out.println("    ├── PriorityQueue");
+       System.out.println("    └── Deque (I) - ArrayDeque, LinkedList");
+       System.out.println("\nMap (I) - Separate hierarchy");
+       System.out.println("├── HashMap, LinkedHashMap");
+       System.out.println("├── SortedMap (I) - TreeMap");
+       System.out.println("├── WeakHashMap, IdentityHashMap");
+       System.out.println("└── ConcurrentHashMap");
+
+       // ============================================
+       // 26. IMPORTANT TIME COMPLEXITIES
+       // ============================================
+
+       System.out.println("\n=== 40. Time Complexity Cheat Sheet ===");
+       System.out.println("ArrayList:");
+       System.out.println("  get(i): O(1) | add(e): O(1)* | add(i,e): O(n) | remove(i): O(n)");
+       System.out.println("LinkedList:");
+       System.out.println("  get(i): O(n) | add(e): O(1) | add(i,e): O(n) | remove(i): O(n)");
+       System.out.println("HashSet/HashMap:");
+       System.out.println("  add/put: O(1)* | contains/get: O(1)* | remove: O(1)*");
+       System.out.println("TreeSet/TreeMap:");
+       System.out.println("  add/put: O(log n) | contains/get: O(log n) | remove: O(log n)");
+       System.out.println("PriorityQueue:");
+       System.out.println("  offer: O(log n) | poll: O(log n) | peek: O(1)");
+       System.out.println("* Amortized time complexity");
+
+       // ============================================
+       // 27. EQUALS AND HASHCODE CONTRACT
+       // ============================================
+
+       System.out.println("\n=== 41. equals() and hashCode() Contract ===");
+       System.out.println("1. If a.equals(b) is true, then a.hashCode() == b.hashCode()");
+       System.out.println("2. If a.hashCode() == b.hashCode(), a.equals(b) may be
