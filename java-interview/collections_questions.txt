@@ -307,7 +307,7 @@ class Main {
        long count = footballers.stream()
            .filter(name -> name.contains("a"))
            .count();
-       System.out.println("Names containing 'a': " + count);
+       System.out.println("Names with letter 'a': " + count);
 
        // ============================================
        // 14. QUEUE & DEQUE OPERATIONS
