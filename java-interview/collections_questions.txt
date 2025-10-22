@@ -29,7 +29,7 @@ class Main {
        footballers.forEach(System.out::println);
 
        System.out.println("\n=== 2. Sorting Based on Length ===");
-       // Custom comparator using method reference
+       // Custom comparator by using method reference
        // Comparator.comparingInt() creates a comparator based on int values
        Collections.sort(footballers, Comparator.comparingInt(String::length));
        footballers.forEach(System.out::println);
