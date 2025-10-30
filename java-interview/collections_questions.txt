@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 class Main {
     public static void main(String[] args) {
 
-       // ============================================
+      
        // 1. CREATING COLLECTIONS
        // ============================================
        
