@@ -1,3 +1,7 @@
+
+
+
+
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
@@ -622,3 +626,39 @@ class Main {
        System.out.println("\n=== 41. equals() and hashCode() Contract ===");
        System.out.println("1. If a.equals(b) is true, then a.hashCode() == b.hashCode()");
        System.out.println("2. If a.hashCode() == b.hashCode(), a.equals(b) may be
+
+
+       // ============================================
+       // 27. EQUALS AND HASHCODE CONTRACT (continued)
+       // ============================================
+
+       System.out.println("\n=== 41. equals() and hashCode() Contract (continued) ===");
+       System.out.println("1. If a.equals(b) is true, then a.hashCode() == b.hashCode().");
+       System.out.println("2. If a.hashCode() == b.hashCode(), a.equals(b) may be true or false (hash collisions).");
+       System.out.println("3. hashCode() must consistently return the same value while the object is unchanged.");
+       System.out.println("4. Use all fields used in equals() when calculating hashCode().");
+       System.out.println("5. Prefer Objects.equals(a,b) to avoid NPEs in equals() implementations.");
+       System.out.println("6. If overriding equals(), always override hashCode() as well.");
+
+       // Practical examples and tips:
+       System.out.println("\n=== Practical Tips / Best Practices ===");
+       System.out.println("- Use IDE-generated equals() and hashCode() or Objects.hash(...) for correctness.");
+       System.out.println("- Keep equals() symmetric, reflexive, transitive, and consistent.");
+       System.out.println("- Make key fields immutable when objects are used as Map keys or Set elements.");
+       System.out.println("- Avoid including mutable collection references in equals/hashCode unless necessary.");
+       System.out.println("- If performance matters, cache hashCode for immutable objects (careful with memory).");
+       System.out.println("- Document the equality semantics for your class (which fields are considered).");
+
+       // Quick helper snippet demonstration (not modifying existing classes)
+       System.out.println("\nExample (pseudo):");
+       System.out.println("class Person {");
+       System.out.println("  private final String id; // immutable unique id used for equals/hashCode");
+       System.out.println("  @Override public boolean equals(Object o) { /* compare id */ }");
+       System.out.println("  @Override public int hashCode() { return Objects.hash(id); }");
+       System.out.println("}");
+
+       // TODOs / Suggestions for repo:
+       System.out.println("\n=== TODOs (for this repo) ===");
+       System.out.println("- Add unit tests validating equals/hashCode for domain model classes.");
+       System.out.println("- Add a coding guideline doc (e.g., CONTRIBUTING.md) that covers equals/hashCode rules.");
+       System.out.println("- Consider static analysis (SpotBugs/Checkstyle) rules to detect bad implementations.");
