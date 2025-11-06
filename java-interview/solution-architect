@@ -25,3 +25,24 @@ S3 Transfer Acceleration speeds up data uploads and downloads over long distance
  7. AWS Tape Gateway – Cloud-Based Virtual Tape Library for Backup
 
 AWS Tape Gateway, part of AWS Storage Gateway, provides a Virtual Tape Library (VTL) solution that allows organizations to back up on-premises data directly to Amazon S3 or Glacier using their existing backup software like Veeam, NetBackup, or Commvault. It eliminates the need for physical tape infrastructure, provides durable offsite backups with 11 9’s durability, encryption, automation, lifecycle policies, and significantly lowers costs compared to traditional tape-based archiving.
+
+6 -- 
+ig we have video file on premis data network attached storage, each video file ranges from 1 mb to 500gb , total storage is 70 tb and is no longer growing so to migrate data using least possible bandwidth 
+-we must create a snowball edge job , receive snowball edge device on premise , use the snowball edge client to transfer data to the device and return the device so AWS can import data to s3
+
+7 -- 
+company has an app that ingests incoming messages , dozens of other applications and ms then  only consue thes emssages, the number of messages varies drastically and sometimes increases 100,000 each second , company wants to decuple and increse scalability
+   exp -- 
+when it comes to ms and decoupling only two services are relevant 
+SQS - > simple queue services -> present the data in the form of queue
+SNS -> simple notificaiton service -> just gets and publishes tha data
+
+so if you see either of these services in option its correcct
+
+Ans - publish the messages to an amazon sns topic with multiple amazon sim;le queue services subscriptions consumer the applicaitons to process the message sfrom the queues
+        messages -> topic ->SQS -> ms-1
+                          ->SQS -> ms-2
+                          ->SQS -> ms-3
+
+
+
