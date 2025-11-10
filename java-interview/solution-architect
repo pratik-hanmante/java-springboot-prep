@@ -18,3 +18,69 @@ If you have large files (for example, 70 TB of video data, 1 MB–500 GB each) a
 
 Scale Message Processing – Use SNS + SQS Fan-Out Pattern
 When one app produces messages and many microservices need to consume them, the best design is to publish messages to an SNS topic and subscribe multiple SQS queues. Each service reads from its own queue, so they’re fully decoupled and can scale independently. This setup handles spikes (even 100k msgs/sec), guarantees delivery, supports retries and dead-letter queues, and lets you add new consumers easily. Flow: App → SNS Topic → multiple SQS queues → different microservices.
+
+6 -- 
+ig we have video file on premis data network attached storage, each video file ranges from 1 mb to 500gb , total storage is 70 tb and is no longer growing so to migrate data using least possible bandwidth 
+-we must create a snowball edge job , receive snowball edge device on premise , use the snowball edge client to transfer data to the device and return the device so AWS can import data to s3
+
+7 -- 
+company has an app that ingests incoming messages , dozens of other applications and ms then  only consue thes emssages, the number of messages varies drastically and sometimes increases 100,000 each second , company wants to decuple and increse scalability
+   exp -- 
+when it comes to ms and decoupling only two services are relevant 
+SQS - > simple queue services -> present the data in the form of queue
+SNS -> simple notificaiton service -> just gets and publishes tha data
+
+so if you see either of these services in option its correcct
+
+Ans - publish the messages to an amazon sns topic with multiple amazon sim;le queue services subscriptions consumer the applicaitons to process the message sfrom the queues
+        messages -> topic ->SQS -> ms-1
+                          ->SQS -> ms-2
+                          ->SQS -> ms-3
+
+8 -- 
+
+company migrating distributes applocation to AWS, the spp servers variable workloads, legacy platform consistes of aprimary server that cordinates jobs across multiple comute nodes, company wants to modernize the app with solutuin that maximizes resliency and scalability
+
+so for that answer will need to configure amazon sqs as a destination for the jobs to omplement the compute oned with ec2 that are managed in an autoscaling group
+
+9 --
+
+company is running SMB file server in data center , file server costs that are accesed frquently for first few dats afte rfie sar created after 7 days the files are accessed
+
+total data size is increasing and is close to company total storage capaity , saa must increase company available space without loosing low latency access to recently accessed files , saa should provide lifecyle managment to avoid future storage losses
+
+--if there are lifecyel and policies are mentioned and data needs synchrising so option ashould have file gateway
+so optin would be with file gateway and lifecycle policy
+
+--Ans create and aws s3 file gatewat to extend the company stporage space, create lifecyle policy to transitin data to s3 glacier deep archive after 7 days
+
+10 --
+
+company is building an ecom web app , app sends info about new orders to an amazon api gateway rest api to process the company wants to ensure the orders are processed in the order that reveed order
+which solution will meet the requirements
+
+--- so whenver order in order of as they received is there there should be SQS FIFO
+
+so answer is use an api gateay to send message to SQS FIFO queue when app receives and order
+configure SQS fifo queue to invoke aws lambda function for processing
+
+
+11 -- 
+
+company has an application that runs on AWS ec2 instance and uses aws aurora database, the ec2 instances connect to databases by using user names and passwords that are locally stored in a file, company wants to minimize operational overhead of credential management
+
+-- whenver we are mentioned to store the usrnames and passwords we should always look for the option with 
+AWS Secrets manager in it 
+
+---Ans--- use aws secrets manager , turn on automatic rotation
+
+
+
+12 -- 
+
+global company wants to hosts its web apps on EC2 behind the application load balancer , the web application has static data and dynamoc data the company stres its static data in s3 bucket the company want to impove performace and reduce latency of static and dynamic data, company is using its won domaain name registered with amazon route 53
+
+-- 
+
+
+
