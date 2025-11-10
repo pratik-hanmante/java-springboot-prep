@@ -72,7 +72,8 @@ company has an application that runs on AWS ec2 instance and uses aws aurora dat
 -- whenver we are mentioned to store the usrnames and passwords we should always look for the option with 
 AWS Secrets manager in it 
 
----Ans--- use aws secrets manager , turn on automatic rotation
+---Ans
+use aws secrets manager , turn on automatic rotation
 
 
 
