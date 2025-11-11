@@ -95,6 +95,15 @@ db performace degrades quickly as app load increases , application handles more 
 
 --so  read replcias and because of that amazon aurora with multi az deployment and configure aurora with auto scaling with aurora replicas
 
+15-- 
+
+company migrated to AWS and wants to implement a solution to protect the traffic that flows in and out the prod VPC , company had an insepction serever in its premises data center , inspeciton server performed specific operations usch as traffic flow inspection and traffic filtering , company wants to have same functionalities in the AWS cloud
+
+-- so whenever the traffic flow inspection and traffic filtering is mentioned the option would be
+use AWS network firewall to create the required rules for traffic rules for traffic filtering for prod VPC
+
+
+
 
 
 
