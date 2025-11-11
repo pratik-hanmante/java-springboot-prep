@@ -102,7 +102,13 @@ company migrated to AWS and wants to implement a solution to protect the traffic
 -- so whenever the traffic flow inspection and traffic filtering is mentioned the option would be
 use AWS network firewall to create the required rules for traffic rules for traffic filtering for prod VPC
 
+16--
 
+company hosts data lake on AWS, data latke consists of data in aws s3 and aws rds for postgre, company needs reporting that provides data visulatoization and included all the data sources within ithe data lake, only company comapany management team should have full access to visualizaions, rest of compamny should have only limited access
+
+--so for the visualization quicksight is the tool
+and it has concepts of users,
+so in the option the answer would be create analyis in amazon quicksight connect all data soirces and create new datasets,pubish dashboards to visualize the data m share dsasshboard with appropriate users and groups
 
 
 
