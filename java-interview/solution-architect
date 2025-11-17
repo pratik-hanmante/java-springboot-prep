@@ -32,7 +32,7 @@ SNS -> simple notificaiton service -> just gets and publishes tha data
 
 so if you see either of these services in option its correcct
 
-Ans - publish the messages to an amazon sns topic with multiple amazon sim;le queue services subscriptions consumer the applicaitons to process the message sfrom the queues
+Ans - publish the messages to an amazon sns topic with multiple amazon simple queue services subscriptions consumer the applicaitons to process the message sfrom the queues
         messages -> topic ->SQS -> ms-1
                           ->SQS -> ms-2
                           ->SQS -> ms-3
