@@ -39,7 +39,7 @@ Ans - publish the messages to an amazon sns topic with multiple amazon simple qu
 
 8 -- 
 
-company migrating distributes applocation to AWS, the spp servers variable workloads, legacy platform consistes of aprimary server that cordinates jobs across multiple comute nodes, company wants to modernize the app with solutuin that maximizes resliency and scalability
+company migrating distributes applocation to AWS, the spp servers variable workloads, legacy platform consists of aprimary server that cordinates jobs across multiple comute nodes, company wants to modernize the app with solutuin that maximizes resliency and scalability
 
 so for that answer will need to configure amazon sqs as a destination for the jobs to omplement the compute oned with ec2 that are managed in an autoscaling group
 
