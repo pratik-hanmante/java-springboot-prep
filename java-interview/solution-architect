@@ -93,7 +93,7 @@ so to get the leasar operational overhead
 company runs an ecommernec app on ec2 isntance behind an Application Load balancer , instancces run in an amazon ec2 auto scaling group across multiple availability zones,auto scaling group scales basdd on CPU utilization metrics the ecoomerce the ecom applicatiom stores data in mysql db , that hosted on large ec2
 db performace degrades quickly as app load increases , application handles more read request than write actions, company wants a solution that will automatically scale the db to meet demand of unpredictable read workloads
 
---so  read replcias and because of that amazon aurora with multi az deployment and configure aurora with auto scaling with aurora replicas
+--so  read replicas and because of that amazon aurora with multi az deployment and configure aurora with auto scaling with aurora replicas
 
 15-- 
 
