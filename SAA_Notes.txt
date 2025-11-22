@@ -1,12 +1,12 @@
-cloudwatch provides metrics for every service in AWS
--metric is a variable to monitor 
--metric belongs to namespaces
--dimension is an attriubute of metric 
--up to 30 dimesnions per metric
--can create cloudwatch dashboards of metrics
--can create cloudwatch custom metrics\
+CloudWatch provides metrics for every service in AWS.
+A metric is a variable you want to monitor.
+Metrics belong to namespaces.
+A dimension is an attribute of a metric.
+You can have up to 30 dimensions per metric.
+You can create CloudWatch dashboards to visualize metrics.
+You can also create CloudWatch custom metrics.
 
----cloudwatch metric strams
-continuelly stream cloudwatch metrics to a destinatini of your choice with near real time delivery and low latency
--cwm streams near real time to kinesis data firehouse and send it to S# or amazon redshift or amazon opensearch for monitoring
-and when we connect to atherna we can check this 
+CloudWatch Metric Streams:
+Metric Streams continuously stream CloudWatch metrics to a destination of your choice with near real-time delivery and low latency.
+Metric Streams send data in near real time to Kinesis Data Firehose, which can deliver the metrics to Amazon S3, Amazon Redshift, or Amazon OpenSearch for monitoring and analysis.
+After the data lands in S3, you can query it using Athena.
