@@ -9,4 +9,4 @@ You can also create CloudWatch custom metrics.
 CloudWatch Metric Streams:
 Metric Streams continuously stream CloudWatch metrics to a destination of your choice with near real-time delivery and low latency.
 Metric Streams send data in near real time to Kinesis Data Firehose, which can deliver the metrics to Amazon S3, Amazon Redshift, or Amazon OpenSearch for monitoring and analysis.
-After the data lands in S3, you can query it using Athena.
+After the data lands in S3, you can query it with Athena.
