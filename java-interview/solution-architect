@@ -11,7 +11,7 @@ Restrict Access to Only Organization Accounts
 If you are using AWS Organizations and want only your org’s accounts to access your S3 bucket or other services, add the condition key aws:PrincipalOrgID to your IAM or bucket policy. This automatically includes all accounts in the org, no need to manually list them.
 
 Analyze JSON Logs in S3 – Use Amazon Athena
-If your logs are stored in S3 and you just need to run SQL queries without setting up servers or databases, Athena is perfect. It’s serverless, queries data directly in S3, and you only pay per query. Works with AWS Glue Data Catalog for schema management and is great for quick analytics or auditing.
+If your logs are stored in S3 and you just need to run SQL queries without setting up servers or databases, Athena is perfect. It’s serverless, queries data directly in S3, and you only pay per query. Works with AWS Glue Data Catalog for schema management and it is great for quick analytics or auditing.
 
 Migrate Large On-Prem Data to S3 – Use AWS Snowball Edge
 If you have large files (for example, 70 TB of video data, 1 MB–500 GB each) and limited bandwidth, use AWS Snowball Edge. AWS ships you an encrypted 80 TB device; you copy your data locally using the Snowball client or NFS, then send it back. AWS imports the data into S3. It’s offline, fast, secure (256-bit encryption), trackable, and much cheaper than uploading over the internet.
