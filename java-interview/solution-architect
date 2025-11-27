@@ -25,7 +25,7 @@ ig we have video file on premis data network attached storage, each video file r
 
 7 -- 
 company has an app that ingests incoming messages , dozens of other applications and ms then  only consue thes emssages, the number of messages varies drastically and sometimes increases 100,000 each second , company wants to decuple and increse scalability
-   exp -- 
+   example --
 when it comes to ms and decoupling only two services are relevant 
 SQS - > simple queue services -> present the data in the form of queue
 SNS -> simple notificaiton service -> just gets and publishes tha data
