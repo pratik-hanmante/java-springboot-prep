@@ -1,4 +1,4 @@
-Amazon EFS – Shared File System for Multiple EC2s
+Amazon EFS – Shared File System for Multiple EC2 instances
 Amazon EFS is like a shared drive that multiple EC2 instances can mount at the same time using NFSv4. It’s fully managed and elastic, growing or shrinking as needed. Unlike EBS (which can attach to only one instance), EFS works across multiple Availability Zones and is great for web apps, microservices, shared logs, or CMS storage. If you move data from EBS to EFS, all EC2s can access the same files instantly without manual syncing.
 
 Secure S3 Access from Private EC2 – Use VPC Gateway Endpoint
