@@ -19,7 +19,7 @@ Object store S3 - for big objects/glacier (for backups)
 
 
 VPC - 
-CIDR - classless inter domain routing - method for allocating IP addresses\
+CIDR - classless inter domain routing - method for allocating IP addresses
 it depends on the subnet masks how many devices will be there
 
 -we've seen xx.xx.xxx.tt/32 => one ip
@@ -27,3 +27,6 @@ it depends on the subnet masks how many devices will be there
 -but we can define 192.168.0.0/26 => 192.168.0.0 - 192.168/0.63 => 63 ip addresses
 
 it depends on the subnet masks how many devices will be there
+
+
+
