@@ -1,0 +1,27 @@
+17 - 
+
+company implementing a new businedd application the app runs on two ec2 instances and uses an s3 bucket for doc sotrage , a solutions architect needs to ensure that the ec2 instanc can access the bucket
+-- create and IAM role that grants the access
+
+18 -
+
+an app dev team is designing ms that will large images to smaller compressed form, when user uploads the image the ms should the image into s3 bucket and prcess and compress the image with an aws lambda function and store the image in compressed form in different s3 bucket
+so SAA needs to design a solution that uses durable ,stateless components to process the images automatically,
+which combination need to be used 
+-- a - create and aws simple queue service , configure the s3 bucket to send notification to SQS queue when an image is uploaded to s3 bucket
+   b - configure the lambda g=functiond to use the amazon sqs as invocation source when sqs message is successfully processed delete message in the queue 
+
+19 - 
+-question not valid
+company has 3 tier web app deployed on aws, web servers are deployed in a public subnet in VPC , app servers and databases are deployed in private subnet in same vpc, company has deployed a 3rd party  virtual firewall appliance from AWS marketplace in an inspection VPC, appliance is configured with an IP interface that can accept IP packets
+solution architect needs to integrate the web apps to inspect all traffic to app before the traffic reaces the web server , which solution meets the requirement with least overhead
+-- GLB - gateway load balancer - user for the inspection purposes
+  extra - ALB - userd for layer 7 vpc architecture
+          NLB - used for layer 4 vpc arch
+
+20 -
+
+company want to improve cloing multiple prod data into test env in same aws region, data is stored in 
+
+
+
