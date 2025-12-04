@@ -21,7 +21,7 @@ solution architect needs to integrate the web apps to inspect all traffic to app
 
 20 -
 
-company want to improve cloing multiple prod data into test env in same aws region, data is stored in 
+company want to improve cloing multiple prod data into test env in same aws region, data is stored in ec2 instances on aws blocjk storage volumes
 
 
 
