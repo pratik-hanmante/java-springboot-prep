@@ -26,7 +26,7 @@ company want to improve cloing multiple prod data into test env in same aws regi
 
 21
 
-an e com company wants to launch ine deal a day website on AWS , each day will feature exactly on sale for a period of 24 hrs , the companywants to be able to handle millions of requests with each hour with milliseconds latency during peal hrs
+an e com company wants to launch ine deal a day website on AWS , each day will feature exactly on sale for a period of 24 hrs , the companywants to be able to handle millions of requests with each hour with milliseconds latency during peal hr
 
 --- so as far as the websiite is considered so it is static hosting,and it will get millions of equests in includes edge locatin shtat is cloudfront
 
