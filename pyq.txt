@@ -21,7 +21,16 @@ solution architect needs to integrate the web apps to inspect all traffic to app
 
 20 -
 
-company want to improve cloing multiple prod data into test env in same aws region, data is stored in ec2 instances on aws blocjk storage volumes
+company want to improve cloing multiple prod data into test env in same aws region, data is stored in ec2 instances on aws blocjk storage volumes, it should not affect the prod data, sw requres consitently high i/o performance
+--take ebs snapshots of prod ebs volumes , turn in ebs fast snapshot restore feature in the ebs snapsots , restore the snapshots into new ebs cvolumes attach new EBS volumes to ec2 inwtnqves in the test env
+
+21
+
+an e com company wants to launch ine deal a day website on AWS , each day will feature exactly on sale for a period of 24 hrs , the companywants to be able to handle millions of requests with each hour with milliseconds latency during peal hrs
+
+--- so as far as the websiite is considered so it is static hosting,and it will get millions of equests in includes edge locatin shtat is cloudfront
+
+-- use an aws s3 buckeet to host website content, deploy aws cloudfront distribution set s3 bucket as the origin , use amazon aoi gateway and aws lambda functions for the backend apis store data in dynamo db
 
 
 
