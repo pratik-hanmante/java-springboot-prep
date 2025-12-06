@@ -33,4 +33,27 @@ an e com company wants to launch ine deal a day website on AWS , each day will f
 -- use an aws s3 buckeet to host website content, deploy aws cloudfront distribution set s3 bucket as the origin , use amazon aoi gateway and aws lambda functions for the backend apis store data in dynamo db
 
 
+22 
+
+saa using s3 to make media application and the media files should be resilient to the loss of the availability zone and some filesare accessed fequently while other are rearly accessed unpredictible pattern, saa should minimze the cost of storing and retrieving
+
+--- as it suggests unpredcitble pattern so we need to go with intelligent tearing
+
+-- intellignet tearing
+
+23 -
+
+companhy is storing backups by using s3 standard storage , files are accessed frequently for 1 month, however the files are not accessed after 1 month , company wants to keep the files indefinitly
+
+--- create s3 lifecycle config to transition objects from s3 standard to s3 glacier deep archive after 1 month
+
+24 -
+
+
+
+
+
+
+
+
 
