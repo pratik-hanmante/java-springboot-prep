@@ -49,6 +49,7 @@ companhy is storing backups by using s3 standard storage , files are accessed fr
 
 24 -
 
+aws monitoring 
 
 
 
