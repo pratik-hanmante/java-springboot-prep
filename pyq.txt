@@ -16,7 +16,7 @@ which combination need to be used
 company has 3 tier web app deployed on aws, web servers are deployed in a public subnet in VPC , app servers and databases are deployed in private subnet in same vpc, company has deployed a 3rd party  virtual firewall appliance from AWS marketplace in an inspection VPC, appliance is configured with an IP interface that can accept IP packets
 solution architect needs to integrate the web apps to inspect all traffic to app before the traffic reaces the web server , which solution meets the requirement with least overhead
 -- GLB - gateway load balancer - user for the inspection purposes
-  extra - ALB - userd for layer 7 vpc architecture
+  extra large - ALB - userd for layer 7 vpc architecture
           NLB - used for layer 4 vpc architecture
 
 20 -
