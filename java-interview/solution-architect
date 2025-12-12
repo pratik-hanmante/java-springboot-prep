@@ -79,7 +79,7 @@ use aws secrets manager , turn on automatic rotation
 
 12 -- 
 
-global company wants to hosts its web apps on EC2 behind the application load balancer , the web application has static data and dynamoc data the company stres its static data in s3 bucket the company want to impove performace and reduce latency of static and dynamic data, company is using its won domain name registered with amazon route 53
+global company wants to hosts its web apps on EC2 behind the application load balancer, web application has static data and dynamoc data the company stres its static data in s3 bucket the company want to impove performace and reduce latency of static and dynamic data, company is using its won domain name registered with amazon route 53
 
 13 -- 
 
