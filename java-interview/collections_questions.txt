@@ -52,8 +52,7 @@ class Main {
        });
        footballers.forEach(System.out::println);
 
-       // ============================================
-       // 3. MANIPULATION OPERATIONS
+// 3. MANIPULATION OPERATIONS
        // ============================================
 
        System.out.println("\n=== 5. Shuffling the Elements ===");
