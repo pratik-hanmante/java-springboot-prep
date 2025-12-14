@@ -11,7 +11,7 @@ class Main {
 
       
        // 1. CREATING COLLECTIONS
-       // ============================================
+       
        
        // Arrays.asList() creates a FIXED-SIZE list (cannot add/remove elements)
        // Wrap it in ArrayList to make it modifiable
