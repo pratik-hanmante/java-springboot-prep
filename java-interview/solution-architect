@@ -73,7 +73,7 @@ company has an application that runs on AWS ec2 instance and uses aws aurora dat
 AWS Secrets manager in it 
 
 ---Ans
-use aws secrets manager , turn on automatic rotation
+use amazon aws secrets manager , turn on automatic rotation
 
 
 
