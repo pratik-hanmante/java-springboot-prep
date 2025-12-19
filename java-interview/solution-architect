@@ -1,116 +1,33 @@
-Amazon EFS – Shared File System for Multiple EC2 instances
-Amazon EFS is like a shared drive that multiple EC2 instances can mount at the same time using NFSv4. It’s fully managed and elastic, growing or shrinking as needed. Unlike EBS (which can attach to only one instance), EFS works across multiple Availability Zones and is great for web apps, microservices, shared logs, or CMS storage. If you move data from EBS to EFS, all EC2s can access the same files instantly without manual syncing.
+Amazon EFS is a fully managed, elastic NFS (v4.1) file system that can be mounted by multiple EC2 instances at the same time, even across multiple Availability Zones. Unlike EBS, which can be attached to only one EC2 instance, EFS is designed for shared storage and automatically scales as data grows or shrinks. It is ideal for use cases such as web servers, microservices, CMS content, and shared logs where multiple instances need access to the same files simultaneously.
 
-Secure S3 Access from Private EC2 – Use VPC Gateway Endpoint
-If EC2 instances are in a private subnet with no internet or NAT Gateway, create a VPC Gateway Endpoint for S3. This keeps all traffic inside AWS’s internal network, improving security and reducing latency and cost. Combine with IAM and bucket policies to allow access only through that endpoint.
+When EC2 instances are in private subnets with no Internet Gateway or NAT Gateway and need access to Amazon S3, a VPC Gateway Endpoint for S3 should be used. This keeps all traffic within the AWS network, improves security, reduces latency, and lowers cost. Access can be tightly controlled using IAM policies and S3 bucket policies with conditions such as aws:SourceVpce.
 
-Secure Static Website on S3 – Use CloudFront + ACM
-S3 by itself doesn’t support HTTPS. To serve a secure website, use CloudFront in front of the S3 bucket and issue a free SSL/TLS certificate via AWS Certificate Manager (ACM). CloudFront gives you HTTPS, caching, global delivery, and DDoS protection. The setup is: user → CloudFront → S3.
+Amazon S3 static website hosting does not support HTTPS by itself. To host a secure static website, CloudFront should be placed in front of the S3 bucket, and an SSL/TLS certificate should be issued using AWS Certificate Manager (ACM). The correct architecture is user → CloudFront → S3. CloudFront provides HTTPS, caching, global content delivery, and DDoS protection.
 
-Restrict Access to Only Organization Accounts
-If you are using AWS Organizations and want only your org’s accounts to access your S3 bucket or other services, add the condition key aws:PrincipalOrgID to your IAM or bucket policy. This automatically includes all accounts in the org, no need to manually list them.
+If using AWS Organizations and the requirement is to restrict access to only accounts within the organization, the condition key aws:PrincipalOrgID should be used in IAM or S3 bucket policies. This allows all accounts in the organization without listing individual account IDs and automatically includes new accounts added to the organization.
 
-Analyze JSON Logs in S3 – Use Amazon Athena
-If your logs are stored in S3 and you just need to run SQL queries without setting up servers or databases, Athena is perfect. It’s serverless, queries data directly in S3, and you only pay per query. Works with AWS Glue Data Catalog for schema management and it is great for quick analytics or auditing.
+When JSON or structured logs are stored in Amazon S3 and need to be analyzed using SQL without managing servers, Amazon Athena is the best choice. Athena is serverless, queries data directly in S3, integrates with AWS Glue Data Catalog, and charges only per query. It is ideal for ad-hoc analytics, auditing, and log analysis.
 
-Migrate Large On-Prem Data to S3 – Use AWS Snowball Edge
-If you have large files (for example, 70 TB of video data, 1 MB–500 GB each) and limited bandwidth, use AWS Snowball Edge. AWS ships you an encrypted 80 TB device; you copy your data locally using the Snowball client or NFS, then send it back. AWS imports the data into S3. It’s offline, fast, secure (256-bit encryption), trackable, and much cheaper than uploading over the internet.
+For migrating large amounts of on-premises data to AWS when bandwidth is limited, AWS Snowball Edge should be used. In a scenario where video files range from 1 MB to 500 GB, total data is around 70 TB, and data is no longer growing, the best approach is to create a Snowball Edge job, receive the encrypted 80 TB device on premises, copy data locally using the Snowball client or NFS, and ship the device back to AWS so the data can be imported into S3. Snowball provides offline transfer, 256-bit encryption, and is faster and cheaper than transferring data over the internet.
 
-Scale Message Processing – Use SNS + SQS Fan-Out Pattern
-When one app produces messages and many microservices need to consume them, the best design is to publish messages to an SNS topic and subscribe multiple SQS queues. Each service reads from its own queue, so they’re fully decoupled and can scale independently. This setup handles spikes (even 100k msgs/sec), guarantees delivery, supports retries and dead-letter queues, and lets you add new consumers easily. Flow: App → SNS Topic → multiple SQS queues → different microservices.
+When an application produces messages that need to be consumed by many microservices, and traffic can spike to 100,000 messages per second, the best design is the SNS + SQS fan-out pattern. Messages are published to an SNS topic, and multiple SQS queues subscribe to the topic. Each microservice consumes messages from its own queue, allowing full decoupling, independent scaling, retry handling, and dead-letter queues. Flow is producer → SNS topic → multiple SQS queues → different microservices.
 
-6 -- 
-ig we have video file on premis data network attached storage, each video file ranges from 1 mb to 500gb , total storage is 70 tb and is no longer growing so to migrate data using least possible bandwidth 
--we must create a snowball edge job , receive snowball edge device on premise , use the snowball edge client to transfer data to the device and return the device so AWS can import data to s3
+In a distributed application where a legacy primary server coordinates jobs across multiple compute nodes and workloads vary, modernization can be achieved by sending jobs to Amazon SQS and using EC2 instances in an Auto Scaling Group as workers. Each worker polls the queue and processes jobs, providing resiliency, fault tolerance, and automatic scaling.
 
-7 -- 
-company has an app that ingests incoming messages , dozens of other applications and ms then  only consue thes emssages, the number of messages varies drastically and sometimes increases 100,000 each second , company wants to decuple and increse scalability
-   example --
-when it comes to ms and decoupling only two services are relevant 
-SQS - > simple queue services -> present the data in the form of queue
-SNS -> simple notificaiton service -> just gets and publishes tha data
+If a company runs an on-premises SMB file server where files are frequently accessed for the first few days and rarely accessed after 7 days, and total storage is nearing capacity, AWS S3 File Gateway should be used. File Gateway provides low-latency access to recently accessed data while storing data durably in S3. A lifecycle policy should be configured to transition data to S3 Glacier Deep Archive after 7 days to reduce storage costs and prevent future capacity issues.
 
-so if you see either of these services in option its correcct
+When an e-commerce application sends orders through an API and orders must be processed strictly in the order they are received, Amazon SQS FIFO should be used. API Gateway can send messages to an SQS FIFO queue, which guarantees ordering and exactly-once processing. An AWS Lambda function can then be triggered to process the orders.
 
-Ans --- publish the messages to an amazon sns topic with multiple amazon simple queue services subscriptions consumer the applicaitons to process the message sfrom the queues
-        messages -> topic ->SQS -> ms-1
-                          ->SQS -> ms-2
-                          ->SQS -> ms-3
+If an EC2-based application connects to an Amazon Aurora database using usernames and passwords stored locally in files and the company wants to reduce operational overhead, AWS Secrets Manager should be used. Secrets Manager securely stores credentials, integrates with IAM, and supports automatic rotation.
 
-8 -- 
+For a global web application hosted on EC2 behind an Application Load Balancer, where static data is stored in S3 and the company uses Route 53, CloudFront should be used to improve performance and reduce latency. CloudFront can serve both static content from S3 and dynamic content from the ALB, providing global caching and faster access for users worldwide.
 
-company migrating distributes applocation to AWS, the spp servers variable workloads, legacy platform consists of aprimary server that cordinates jobs across multiple comute nodes, company wants to modernize the app with solutuin that maximizes resliency and scalability
+When database credentials for Amazon RDS MySQL need to be rotated regularly across multiple AWS regions with minimal operational effort, AWS Secrets Manager with automatic rotation and multi-region support is the correct solution.
 
-so for that answer will need to configure amazon sqs as a destination for the jobs to omplement the compute oned with ec2 that are managed in an autoscaling group
+If an e-commerce application is read-heavy and database performance degrades as traffic increases, the database should be migrated from MySQL on EC2 to Amazon Aurora. Aurora supports read replicas, Multi-AZ deployments, and Aurora Auto Scaling, which automatically adjusts the number of read replicas to handle unpredictable read workloads.
 
-9 --
+When a company wants to inspect and filter network traffic flowing in and out of a production VPC and previously used an inspection server on-premises, AWS Network Firewall should be deployed. Network Firewall provides stateful and stateless traffic inspection, filtering, and centralized control for VPC traffic.
 
-company is running SMB file server in data center , file server costs that are accesed frquently for first few dats afte rfie sar created after 7 days the files are accessed
+For data visualization and reporting on a data lake that includes data stored in S3 and Amazon RDS for PostgreSQL, Amazon QuickSight should be used. QuickSight connects to multiple data sources, allows creation of datasets and analyses, and supports dashboards that can be shared with users and groups. Access can be controlled so management has full access while other employees have limited access.
 
-total data size is increasing and is close to company total storage capaity , saa must increase company available space without loosing low latency access to recently accessed files , saa should provide lifecyle managment to avoid future storage losses
-
---if there are lifecyel and policies are mentioned and data needs synchrising so option ashould have file gateway
-so optin would be with file gateway and lifecycle policy
-
---Ans create and aws s3 file gatewat to extend the company stporage space, create lifecyle policy to transitin data to s3 glacier deep archive after 7 days
-
-10 --
-
-company is building an ecom web app , app sends info about new orders to an amazon api gateway rest api to process the company wants to ensure the orders are processed in the order that reveed order
-which solution will meet the requirements
-
---- so whenver order in order of as they received is there there should be SQS FIFO
-
-so answer is use an api gateay to send message to SQS FIFO queue when app receives and order
-configure SQS fifo queue to invoke aws lambda function for processing
-
-
-11 -- 
-
-company has an application that runs on AWS ec2 instance and uses aws aurora database, the ec2 instances connect to databases by using user names and passwords that are locally stored in a file, company wants to minimize operational overhead of credential management
-
--- whenver we are mentioned to store the usrnames and passwords we should always look for the option with 
-AWS Secrets manager in it 
-
----Ans
-use amazon aws secrets manager , turn on automatic rotation
-
-
-
-12 -- 
-
-global company wants to hosts its web apps on EC2 behind the application load balancer, web application has static data and dynamoc data the company stres its static data in s3 bucket the company want to impove performace and reduce latency of static and dynamic data, company is using its won domain name registered with amazon route 53
-
-13 -- 
-
-company performs monthly maintainance on it AWS infra , during these maintenence activites the company needs to rotate the creds for its amazon RDS for MYsql DB across multiple AWS regions
-so to get the leasar operational overhead
-
---so whenever the db and the creds are mentioned we should go with the aws secret manager
-
-14 --
-
-company runs an ecommernec app on ec2 isntance behind an Application Load balancer , instancces run in an amazon ec2 auto scaling group across multiple availability zones,auto scaling group scales basdd on CPU utilization metrics the ecoomerce the ecom applicatiom stores data in mysql db , that hosted on large ec2
-db performace degrades quickly as app load increases , application handles more read request than write actions, company wants a solution that will automatically scale the db to meet demand of unpredictable read workloads
-
---so  read replicas and because of that amazon aurora with multi az deployment and configure aurora with auto scaling with aurora replicas
-
-15-- 
-
-company migrated to AWS and wants to implement a solution to protect the traffic that flows in and out the prod VPC , company had an insepction serever in its premises data center , inspeciton server performed specific operations usch as traffic flow inspection and traffic filtering , company wants to have same functionalities in the AWS cloud
-
--- so whenever the traffic flow inspection and traffic filtering is mentioned the option would be
-use AWS network firewall to create the required rules for traffic rules for traffic filtering for prod VPC
-
-16--
-
-company hosts data lake on AWS, data latke consists of data in aws s3 and aws rds for postgre, company needs reporting that provides data visulatoization and included all the data sources within ithe data lake, only company comapany management team should have full access to visualizaions, rest of compamny should have only limited access
-
---so for the visualization quicksight is the tool we should check in the options for it
-and it has concepts of the users,
-so in the option the answer would be create analyis in amazon quicksight connect all data soirces and create new datasets,pubish dashboards to visualize the data m share dsasshboard with appropriate users and groups
-
-
-
-
-
+High-yield exam reminders: EBS is single-instance block storage, EFS is shared file storage, S3 is object storage, and FSx is for specialized high-performance file systems. Whenever passwords or secrets are mentioned, choose AWS Secrets Manager. For asynchronous decoupling, use SQS or SNS. For analytics on S3, use Athena. For traffic inspection, use AWS Network Firewall. For global performance, use CloudFront.
