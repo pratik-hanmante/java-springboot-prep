@@ -20,7 +20,7 @@ class Main {
 
       
        // 2. SORTING OPERATIONS
-       // ============================================
+       
        
        System.out.println("\n=== 1. Sorting Alphabetically (Natural Order) ===");
        // Collections.sort() uses natural ordering (alphabetical for Strings)
