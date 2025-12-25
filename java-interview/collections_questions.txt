@@ -71,7 +71,7 @@ class Main {
        Collections.rotate(footballers, 3); // Move last 3 elements to front
        footballers.forEach(System.out::println);
 
-       // ============================================
+      
        // 4. IMMUTABILITY & THREAD-SAFETY
        // ============================================
 
