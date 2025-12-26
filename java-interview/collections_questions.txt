@@ -73,7 +73,7 @@ class Main {
 
       
        // 4. IMMUTABILITY & THREAD-SAFETY
-       // ============================================
+       
 
        System.out.println("\n=== 9. Creating an Unmodifiable Collection ===");
        // Returns an unmodifiable view - any modification throws UnsupportedOperationException
