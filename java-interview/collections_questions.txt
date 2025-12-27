@@ -122,7 +122,7 @@ class Main {
        int frequency = Collections.frequency(footballers, "Kevin De Bruyne");
        System.out.println("Frequency of 'Kevin De Bruyne': " + frequency);
 
-       // ============================================
+       
        // 6. SET OPERATIONS
        // ============================================
 
