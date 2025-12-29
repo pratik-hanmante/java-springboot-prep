@@ -96,7 +96,7 @@ class Main {
            synchronizedList.forEach(System.out::println);
        }
 
-       // ============================================
+       
        // 5. SEARCHING & FINDING
        // ============================================
 
