@@ -26,7 +26,6 @@ it depends on the subnet masks how many devices will be there
 -we;ve seen 0.0.0.0/0 => one IP
 -but we can define 192.168.0.0/26 => 192.168.0.0 - 192.168/0.63 => 63 ip addresses
 
-it depends on the subnet masks how many devices will be there
 
 
 
