@@ -98,7 +98,7 @@ class Main {
 
        
        // 5. SEARCHING & FINDING
-       // ============================================
+       
 
        System.out.println("\n=== 11. Finding Max and Min ===");
        // Max/Min based on natural ordering or custom comparator
