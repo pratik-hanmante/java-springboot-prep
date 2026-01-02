@@ -1,0 +1,26 @@
+CIDR  - Subnet mask
+
+subnet mask basically allows part of the underlying IP to get the additional next values from the base IP
+
+192.168.0.0/32 -> it meanes it will have only one IP address i.e 192.168.0.0
+because -- 32 - 32 = 0 , and 2 to the power 0 is 1
+
+like that 192.168.0.0/31 -> it means it will have only 2 IP addresses i.e 192.168.0.0 and 192.168.0.1
+because -- 32 - 31 = 1, and 2 to the power 1 is 2 
+
+192.168.0.0/0 => it means it will accessbile to the whole internet
+
+--PUBLIC/PRIVATE IPV4
+-internet assigned numbers authority established certain blocks of IPV4 addresses for use of privae LAN and public addresses
+
+private IP can only allow certain values 
+10.0.0.0 - 10.255.255.255 -> in big networkd
+
+and all the rest can be accessed and are public
+
+-you can have multiple VLCs in an AWS region (max 5 per region)
+-max CIDR per VPC is 5 but  you can exceed it
+-min size is /28 ( 16 ip addresses)
+-max size is /16 (65536 ip addresses)
+
+-your vpc cidr should now collide with other networks
