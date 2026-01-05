@@ -1,0 +1,19 @@
+amazon simple queue services is fully managed message queing service offered by AWS , it enables decoupling and scaling of microservices, distributed systems and serverless applications
+
+two types of queues 
+-standard queues - offewrs best effort ordering at least once delivery and nearly unlimited throughput , standard queues provide high throughput and are suitable for most applications 
+
+FIFO - offers best message deliverling service where the first message sent will be delivered first and mantain the non reduplication of the messages
+
+retention period means the amount of time sqs can retain the message in the queue
+
+visibility time
+queue hides it from the consumer for some time that time is called visibility time
+
+Cloudwatch - 
+collects and stores the metrics related to sqs such as number of messages in the queue the number of messages in queue the number of messages sent and received and number of messages deleted
+
+and above technique can be used to do autoscaling based on the numnber of messages in the queue
+
+if messages hit some amount it will hit the cloudwatch alarm accordingly that is scale up and scale down actions post alarm
+
