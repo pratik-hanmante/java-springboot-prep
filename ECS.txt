@@ -1,0 +1,18 @@
+aws have their own Elastic container service for docker images and deployment
+-for kubernetes deployment you can use EKS (elastic kubernetes service)
+
+AWS Fargate - 
+ -serverless own serverless platform
+-works with ECS and EKS
+
+ECS has launch types - 
+1.EC2 launch type - 
+ launch docker containers on AWS = launch ECS tasks on ECS clusters
+-you must provision and maintain the infra 
+-each ec2 isntance must run the ECS agent to register in the ECS cluster
+-stopping and starting is taken care by the AWS
+
+Fargate Launch type - 
+-launch docker container on serverless
+-its all serverless
+-you just
