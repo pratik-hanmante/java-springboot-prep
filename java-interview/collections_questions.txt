@@ -230,9 +230,9 @@ class Main {
        demoList.removeIf(s -> s.equals("c"));
        System.out.println("After removeIf: " + demoList);
 
-       // ============================================
+      
        // 11. PERFORMANCE COMPARISON
-       // ============================================
+      
 
        System.out.println("\n=== 22. ArrayList vs LinkedList Performance ===");
        
