@@ -23,4 +23,4 @@ and all the rest can be accessed and are public
 -min size is /28 ( 16 ip addresses)
 -max size is /16 (65536 ip addresses)
 
--your vpc cidr should now collide with other network
+
