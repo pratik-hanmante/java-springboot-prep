@@ -213,7 +213,7 @@ class Main {
 
        // ============================================
        // 10. IMPORTANT COLLECTION METHODS
-       // ============================================
+       
 
        System.out.println("\n=== 21. Important List Methods ===");
        List<String> demoList = new ArrayList<>(Arrays.asList("A", "B", "C", "D", "E"));
