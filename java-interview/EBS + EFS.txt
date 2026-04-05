@@ -1,1 +1,4 @@
+Amazon EBS is a block storage service that provides storage volumes you can attach to virtual machines (EC2 instances)
 
+
+Amazon EFS is a file storage service that provides a shared file system accessible by multiple servers at the same time.
