@@ -2,3 +2,8 @@ Amazon EBS is a block storage service that provides storage volumes you can atta
 
 
 Amazon EFS is a file storage service that provides a shared file system accessible by multiple servers at the same time.
+
+-provides scalable ,elastic file storage for use with amazon ec2 instnaces in the aws cloud , efs supports the network file sysytem version 4 NFSv4 protocol and can be accessede concureently by thousands of EC2 instances it automatically scales as you add and remove files 
+
+scalable and elastic , automatically scales to accomodate workloads with varying storage requirements
+-high availibility and durability : data is stored redudantly across multiple AZs
