@@ -5,5 +5,30 @@ Amazon EFS is a file storage service that provides a shared file system accessib
 
 -provides scalable ,elastic file storage for use with amazon ec2 instnaces in the aws cloud , efs supports the network file sysytem version 4 NFSv4 protocol and can be accessede concureently by thousands of EC2 instances it automatically scales as you add and remove files 
 
+NFS - linux - EFS
+FSX - windows - EBS
+
 scalable and elastic , automatically scales to accomodate workloads with varying storage requirements
 -high availibility and durability : data is stored redudantly across multiple AZs
+-shared accesss as in same file and different ec2 instance accessing
+
+perfect for general purposeand default mode most apps,
+management systems and home dirs
+
+higher throughput and high parralle access to fs
+suitable for big data and analytics media processing and some throughput intensive workloads
+
+key -
+efs automatically grows and shrinks as you add remove files providing storage capacity on demand 
+
+efs supports the nfsv4 protocol making it easy to integrate with existing apps and systems
+
+use cases
+-ideal for apps that requiree shared file systeem for web content and media files
+
+home dirs
+-provides scalable solution for storing user home directories 
+-scalable for big data and analytics workloads that require high throughput
+
+
+
