@@ -13,7 +13,7 @@ class Worker extends Thread {
         for (int i = 1; i <= 3; i++) {
             System.out.println(taskName + " - step " + i);
             try {
-                Thread.sleep(500); // simulate some work
+                Thread.sleep(500); // simulate 
             } catch (InterruptedException e) {
                 System.out.println(taskName + " interrupted!");
             }
