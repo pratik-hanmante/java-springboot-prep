@@ -1,0 +1,40 @@
+OOPS - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+JAVA I/O and Java NIO
+
+main diff - 
+ java i/o - 
+      stram oriented- it is based on streams ,which means data is read and written one byte at a time, this is sequential access approach
+      blocking i/o - java i/o operations are blocing meaning the thread is blocked until the operation is completed
+
+java nio - 
+buffer oriented - java nio uses buffers for data handling , data is read into buffer and then processed from there alowing for non sequential access
+
+on blocking io - it supports non blockigng io means it will work with and allowing other task to conunue for i/o operations to complete , this is useful for hig performance operaations
+
+  chaneels/streams -
+  java io- uses inputStream and outputStream and reader and writer for characer stresm, these classes 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+Design Pattern -
