@@ -33,7 +33,7 @@ public class Main {
         t2.start();
 
         try {
-            // join() makes the main thread wait until both threads finish
+            
             t1.join();
             t2.join();
         } catch (InterruptedException e) {
