@@ -26,9 +26,6 @@ efs supports the nfsv4 protocol making it easy to integrate with existing apps a
 use cases
 -ideal for apps that requiree shared file systeem for web content and media files
 
-home dirs
--provides scalable solution for storing user home directories 
--scalable for big data and analytics workloads that require high throughput
 
 
 
