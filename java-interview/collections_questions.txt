@@ -143,7 +143,7 @@ class Main {
        System.out.println("Copied " + copyFootballers.size() + " elements");
 
        System.out.println("\n=== 16. Replacing All Elements with a Single Value ===");
-       // Collections.fill() replaces all elements with specified value
+//test
        List<String> replaceList = new ArrayList<>(footballers);
        Collections.fill(replaceList, "Unknown Player");
        System.out.println("First 3 after fill: " + replaceList.subList(0, 3));
