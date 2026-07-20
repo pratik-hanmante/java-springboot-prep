@@ -55,7 +55,7 @@ class Main {
        Collections.shuffle(footballers);
        footballers.forEach(System.out::println);
 
-       System.out.println("\n=== 6. Swapping Elements (First and Last) ===");
+       System.out.println("\n=== 6. Swapping Elements (First) ===");
        // Swaps elements at two positions - O(1) operation
        Collections.swap(footballers, 0, footballers.size()-1);
        footballers.forEach(System.out::println);
