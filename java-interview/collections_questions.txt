@@ -50,7 +50,7 @@ class Main {
 // 3. MANIPULATION OPERATIONS
 
 
-       System.out.println("\n=== 5. Shuffling the Elements ===");
+       System.out.println("\n=== 5. Shuffling names ===");
        // Randomly permutes the list - useful for randomizing data
        Collections.shuffle(footballers);
        footballers.forEach(System.out::println);
