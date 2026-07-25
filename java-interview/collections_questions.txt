@@ -38,7 +38,7 @@ class Main {
        footballers.sort(Collections.reverseOrder());
        footballers.forEach(System.out::println);
 
-       System.out.println("\n=== 4. Custom Sorting (By Last Name) ===");
+       System.out.println("test Custom Sorting (By Last Name) ===");
        // Complex comparator: sort by last name (word after space)
        footballers.sort((a, b) -> {
            String lastNameA = a.substring(a.lastIndexOf(" ") + 1);
