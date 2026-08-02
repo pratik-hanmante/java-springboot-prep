@@ -1,7 +1,7 @@
 package $com.pm;
 
 /**
- * Hello world!
+ * Hello india!
  *
  */
 public class App 
