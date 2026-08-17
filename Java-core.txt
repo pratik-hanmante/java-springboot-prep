@@ -1,40 +1,149 @@
-OOPS - 
+## Java I/O and Java NIO
 
+### Main Difference
 
+#### Java I/O
 
+* **Stream-oriented** – Data is handled through streams. It is generally read/written sequentially, often one byte/character at a time.
+* **Blocking I/O** – I/O operations are generally blocking, meaning the thread waits until the operation completes.
+* **Sequential access** – Data is processed sequentially through the stream.
 
+**Streams used in Java I/O:**
 
+* `InputStream` → byte input
+* `OutputStream` → byte output
+* `Reader` → character input
+* `Writer` → character output
 
+Examples:
 
+* `FileInputStream`
+* `FileOutputStream`
+* `FileReader`
+* `FileWriter`
+* `BufferedReader`
+* `BufferedWriter`
 
+---
 
+#### Java NIO (New I/O)
 
+* **Buffer-oriented** – Data is read into a **Buffer** first and then processed from the buffer.
+* **Non-blocking I/O** – Supports non-blocking operations, allowing a thread to perform other work while waiting for I/O operations.
+* **Channel-based** – Uses **Channels** to read/write data.
+* Useful for **high-performance and scalable applications**, especially when handling many simultaneous I/O operations.
 
+**Main components of Java NIO:**
 
+1. **Buffer**
 
+   * Temporary memory area used to read/write data.
+   * Examples:
 
+     * `ByteBuffer`
+     * `CharBuffer`
+     * `IntBuffer`
 
+2. **Channel**
 
+   * Connection through which data is transferred.
+   * Examples:
 
+     * `FileChannel`
+     * `SocketChannel`
+     * `ServerSocketChannel`
+     * `DatagramChannel`
 
+3. **Selector**
 
+   * Allows a single thread to monitor multiple channels.
+   * Commonly used for **non-blocking network I/O**.
 
+### Java I/O vs Java NIO
 
-JAVA I/O and Java NIO
+| Feature          | Java I/O                             | Java NIO                                  |
+| ---------------- | ------------------------------------ | ----------------------------------------- |
+| Model            | Stream-oriented                      | Buffer-oriented                           |
+| Access           | Sequential                           | Buffer-based                              |
+| I/O              | Mostly blocking                      | Supports non-blocking                     |
+| Main abstraction | Streams                              | Channels + Buffers                        |
+| Multiplexing     | Limited                              | `Selector` support                        |
+| Performance      | Good for simple I/O                  | Better for high-concurrency I/O           |
+| Common use       | File processing, simple applications | Networking, high-performance applications |
 
-main diff - 
- java i/o - 
-      stram oriented- it is based on streams ,which means data is read and written one byte at a time, this is sequential access approach
-      blocking i/o - java i/o operations are blocing meaning the thread is blocked until the operation is completed
+### Easy Way to Remember
 
-java nio - 
-buffer oriented - java nio uses buffers for data handling , data is read into buffer and then processed from there alowing for non sequential access
+**Java I/O → Stream → Blocking → Sequential**
 
-on blocking io - it supports non blockigng io means it will work with and allowing other task to conunue for i/o operations to complete , this is useful for hig performance operaations
+**Java NIO → Buffer + Channel → Non-blocking → Scalable**
 
-  chaneels/streams -
-  java io- uses inputStream and outputStream and reader and writer for characer stresm, these classes 
+> **Important:** NIO does not mean that every NIO operation is automatically non-blocking. Non-blocking behavior is mainly available through selectable channels such as `SocketChannel` and `ServerSocketChannel` with `Selector`.
 
----------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
-Design Pattern -
+# Design Patterns
+
+A **Design Pattern** is a reusable solution/template for a commonly occurring software design problem.
+
+It is **not ready-made code**. Instead, it provides a standard approach for structuring classes and objects.
+
+### Main Categories
+
+#### 1. Creational Patterns
+
+Concerned with **object creation**.
+
+* Singleton
+* Factory Method
+* Abstract Factory
+* Builder
+* Prototype
+
+#### 2. Structural Patterns
+
+Concerned with **how classes and objects are combined**.
+
+* Adapter
+* Decorator
+* Facade
+* Proxy
+* Composite
+* Bridge
+* Flyweight
+
+#### 3. Behavioral Patterns
+
+Concerned with **communication and responsibility between objects**.
+
+* Observer
+* Strategy
+* Command
+* State
+* Template Method
+* Chain of Responsibility
+* Iterator
+* Mediator
+* Memento
+* Visitor
+* Interpreter
+
+### Most Important for Java Interviews
+
+Focus especially on:
+
+* **Singleton** → Only one instance of a class
+* **Factory** → Creates objects without exposing creation logic
+* **Builder** → Creates complex objects step-by-step
+* **Strategy** → Allows switching between different algorithms/behaviors
+* **Observer** → One-to-many notification mechanism
+* **Decorator** → Dynamically adds behavior to an object
+* **Adapter** → Makes incompatible interfaces work together
+* **Facade** → Provides a simplified interface to a complex subsystem
+
+### Quick Memory Trick
+
+**Creational → "How do I create objects?"**
+
+**Structural → "How do I connect/combine objects?"**
+
+**Behavioral → "How do objects communicate/behave?"**
