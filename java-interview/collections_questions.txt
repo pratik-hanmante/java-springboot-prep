@@ -52,6 +52,8 @@ Collection = group of individual elements
 Map        = key-value pairs
 Map belongs to the Collections Framework, but does NOT extend Collection.
 
+ok
+
 2. LIST
 A List:
 
